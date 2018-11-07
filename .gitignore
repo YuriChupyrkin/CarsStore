@@ -1,0 +1,9 @@
+# package-lock
+package-lock.json
+
+# JS and CSS bundles
+bundles/
+
+# npm
+node_modules/
+libs/
