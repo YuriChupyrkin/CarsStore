@@ -1,56 +1,95 @@
+const ObjectID = require('mongodb').ObjectID;
+const db = require('../db');
+
+const CollectionName = 'cars';
+
 module.exports = class CarsRepository {
-  constructor() {
-    this._cars = [
-      {
-        id: 1,
-        name: 'Acura',
-      },
-      {
-        id: 2,
-        name: 'Lexus',
-      }
-    ];
+  getCarsCollection() {
+    return db.getDataBase().collection(CollectionName);
+  }
+
+  getFindOneExpr(id) {
+    return { _id: ObjectID(id) };
   }
 
   getCars() {
-    return this._cars;
+    return new Promise((resolve, reject) => {
+      this.getCarsCollection().find().toArray((err, docs) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(docs);
+      });
+    });
   }
 
   getCar(id) {
-    return this._cars.find((item) => {
-      return item.id == id;
+    return new Promise((res, rej) => {
+      this.getCarsCollection().findOne(this.getFindOneExpr(id), (err, car) => {
+        if (err) {
+          rej(err);
+          return;
+        }
+
+        res(car);
+      });
     });
   }
 
   createCar(data) {
-    let lastId = !this._cars ?
-      0 :
-      this._cars[this._cars.length - 1].id;
-
-    let newItem = {
-      id: ++lastId,
+    let car = {
       name: data.name
     };
-    
-    this._cars.push(newItem);
-    return newItem;
+
+    return new Promise((resolve, reject) => {
+      this.getCarsCollection().insertOne(car, (err, result) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(car);
+      });
+    });
   }
 
   updateCar(data) {
-    if (!data.id) {
-      return;
-    }
+    return new Promise((res, rej) => {
+      if (!data._id) {
+        rej('invalid car id');
+        return;
+      }
 
-    let car = this.getCar(data.id);
-    if (!car) {
-      return;
-    }
+      this.getCarsCollection().updateOne(
+        this.getFindOneExpr(data._id),
+        { $set: { name: data.name }},
+        (err, result) => {
+          if (err) {
+            rej(err);
+            return;
+          }
 
-    car.name = data.name;
-    return car;
+          res(result);
+        }
+      );
+    });
   }
 
   deleteCar(id) {
-    this._cars = this._cars.filter((item) => item.id != id);
+    return new Promise((res, rej) => {
+      this.getCarsCollection().deleteOne(
+        this.getFindOneExpr(id),
+        (err, result) => {
+          if (err) {
+            rej(err);
+            return;
+          }
+
+          res(result);
+        }
+      );
+    });
   }
 };

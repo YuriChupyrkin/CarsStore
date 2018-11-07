@@ -20,33 +20,54 @@ module.exports = class RouteHandler {
     });
 
     application.get('/cars', (req, res) => {
-      res.send(this._carRepo.getCars());
+      this._carRepo.getCars().then((cars) => {
+        res.send(cars);
+      }).catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
     });
 
-    application.get('/cars/:id', (req, res) => {
-      let dataItem = this._carRepo.getCar(req.params.id);
-      res.send(dataItem);
+    application.get('/cars/:_id', (req, res) => {
+      this._carRepo.getCar(req.params._id).then((car) => {
+        res.send(car);
+      }).catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
     });
   }
 
   handlePostRequests(application) {
     application.post('/cars', (req, res) => {
-      this._carRepo.updateCar(req.body);
-      res.sendStatus(200);
+      this._carRepo.updateCar(req.body).then(() => {
+        res.sendStatus(200);
+      }).catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
     });
   }
 
   handlePutRequests(application) {
     application.put('/cars', (req, res) => {
-      let newItem = this._carRepo.createCar(req.body);
-      res.send(newItem);
+      this._carRepo.createCar(req.body).then((car) => {
+        res.send(car);
+      }).catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
     });
   }
 
   handleDeleteRequests(application) {
     application.delete('/cars/:id', (req, res) => {
-      this._carRepo.deleteCar(req.params.id);
-      res.sendStatus(200);
+      this._carRepo.deleteCar(req.params.id).then(() => {
+        res.sendStatus(200);
+      }).catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
     });
   }
 };
