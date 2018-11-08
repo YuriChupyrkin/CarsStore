@@ -1,10 +1,6 @@
-const CarRepository = require('../repositories/carsRepository');
+const carsController = require('../controllers/carsController');
 
 module.exports = class RouteHandler {
-  constructor() {
-    this._carRepo = new CarRepository();
-  }
-
   init(application) {
     console.log('Route handler init...');
 
@@ -19,55 +15,19 @@ module.exports = class RouteHandler {
       res.send('index...');
     });
 
-    application.get('/cars', (req, res) => {
-      this._carRepo.getCars().then((cars) => {
-        res.send(cars);
-      }).catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
-    });
-
-    application.get('/cars/:_id', (req, res) => {
-      this._carRepo.getCar(req.params._id).then((car) => {
-        res.send(car);
-      }).catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
-    });
+    application.get('/cars', carsController.all);
+    application.get('/cars/:_id', carsController.findOne);
   }
 
   handlePostRequests(application) {
-    application.post('/cars', (req, res) => {
-      this._carRepo.updateCar(req.body).then(() => {
-        res.sendStatus(200);
-      }).catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
-    });
+    application.post('/cars', carsController.update);
   }
 
   handlePutRequests(application) {
-    application.put('/cars', (req, res) => {
-      this._carRepo.createCar(req.body).then((car) => {
-        res.send(car);
-      }).catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
-    });
+    application.put('/cars', carsController.create);
   }
 
   handleDeleteRequests(application) {
-    application.delete('/cars/:id', (req, res) => {
-      this._carRepo.deleteCar(req.params.id).then(() => {
-        res.sendStatus(200);
-      }).catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
-    });
+    application.delete('/cars/:id', carsController.delete);
   }
 };
