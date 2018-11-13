@@ -5,6 +5,7 @@ const db = require('./Server/db');
 const RouteHandler = require('./Server/handlers/routeHandler');
 
 const serverPort = 8888;
+const indexPath = '../../Client/root';
 
 // server setup
 const app = express();
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // routing
 const routeHandler = new RouteHandler();
-routeHandler.init(app);
+routeHandler.init(app, indexPath);
 
 // connect to database
 db.connect('mongodb://localhost:27017', (err) => {

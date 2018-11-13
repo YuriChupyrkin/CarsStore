@@ -1,8 +1,11 @@
+const path = require('path');
 const carsController = require('../controllers/carsController');
 
 module.exports = class RouteHandler {
-  init(application) {
+  init(application, indexPath) {
     console.log('Route handler init...');
+
+    this._indexPath = indexPath;
 
     this.handleGetRequests(application);
     this.handlePostRequests(application);
@@ -12,7 +15,7 @@ module.exports = class RouteHandler {
 
   handleGetRequests(application) {
     application.get('/', (req, res) => {
-      res.send('index...');
+      res.sendFile('index.html', { root: path.join(__dirname, this._indexPath) });
     });
 
     application.get('/cars', carsController.all);
