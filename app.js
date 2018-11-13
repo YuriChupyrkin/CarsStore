@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const db = require('./db');
-const RouteHandler = require('./handlers/routeHandler');
+const db = require('./Server/db');
+const RouteHandler = require('./Server/handlers/routeHandler');
 
 const serverPort = 8888;
 
