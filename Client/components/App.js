@@ -1,27 +1,29 @@
 require('./App.scss');
 
 import React, { Component } from 'react';
-//import { connect } from 'react-redux';
+import { HashRouter, Route } from 'react-router-dom';
 
 import Todos from './todo/todos';
 import Contacts from './contacts/contacts';
+import NavigationBar from './navigation/navigationBar';
 
 class App extends Component {
   render() {
     console.warn('RENDER OF APP');
-    return <div>
-      <h1 className="red">My React APP</h1>
-      <Todos></Todos>
-      <Contacts></Contacts>
-    </div>
+    return <HashRouter>
+      <div className="app">
+        <div className="header">
+          <h1 className="red">My React APP</h1>
+          <NavigationBar></NavigationBar>
+        </div>
+        <div className="body">
+          <Route path="/" component={Todos} exact />
+          <Route path="/contacts" component={Contacts}/>
+        </div>
+        <div className="footer"></div>
+      </div>
+    </HashRouter>;
   }
 }
 
 export default App;
-
-// export default connect(
-//   state => ({
-//     appStore: state
-//   }),
-//   dispatch => ({})
-// )(App);
