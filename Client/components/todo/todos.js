@@ -60,7 +60,7 @@ class Todos extends Component {
 
 export default connect(
   state => ({
-    todosStore: state.todos
+    todosStore: state.todosReducer
   }),
   dispatch => ({
     onAddTodo: (id, value) => {

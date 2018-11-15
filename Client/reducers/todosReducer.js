@@ -1,32 +1,23 @@
-const createNewState = (state, newItem = {}) => {
-  return  Object.assign({}, state, newItem);
-};
+import { createNewStateObject } from '../utils/common-utils';
+import todoReducer from './todoReducer';
 
-const todos = (state = {}, action) => {
+const todosReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case 'ADD_TODO':
-      return createNewState(
+      return createNewStateObject(
         state,
         {
-          [action.id]: {
-            id: action.id,
-            value: action.value,
-            complete: action.complete
-          }
+          [action.id]: todoReducer(undefined, action)
         }
       );
     case 'TOGGLE_TODO':
-      newState = createNewState(state);
-      newState[action.id] = Object.assign(
-        {},
-        state[action.id],
-        {complete: !state[action.id].complete}
-      );
+      newState = createNewStateObject(state);
+      newState[action.id] = todoReducer(state[action.id], action);
       return newState;
     default:
       return state;
   }
 };
 
-export default todos;
+export default todosReducer;

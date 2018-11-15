@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux';
-import todos from './reducers/todosReducer';
-import contacts from './reducers/contactsReducer';
+import todosReducer from './reducers/todosReducer';
+import contactsReducer from './reducers/contactsReducer';
 
 const appReducers = combineReducers({
-  todos,
-  contacts
+  todosReducer,
+  contactsReducer
 });
 
 const store = createStore(appReducers);

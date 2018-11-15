@@ -1,12 +1,9 @@
-const createNewState = (state, newItem = {}) => {
-  return  Object.assign({}, state, newItem);
-};
+import { createNewStateObject } from '../utils/common-utils';
 
-const contacts = (state = {}, action) => {
-  let newState;
+const contactsReducer = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_CONTACT':
-      return createNewState(
+      return createNewStateObject(
         state,
         {
           [action.id]: {
@@ -21,4 +18,4 @@ const contacts = (state = {}, action) => {
   }
 };
 
-export default contacts;
+export default contactsReducer;

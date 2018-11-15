@@ -61,7 +61,7 @@ class Contacts extends Component {
 
 export default connect(
   state => ({
-    contactsStore: state.contacts
+    contactsStore: state.contactsReducer
   }),
   dispatch => ({
     onAddContact: (id, name, email) => {
