@@ -32,10 +32,4 @@ if (process.env.NODE_ENV !== 'production') {
   store.dispatch = logDispatch(store);
 }
 
-/*
-store.subscribe(throttle(() => {
-  // TODO: save...
-}, 1000));
-*/
-
 export default store;
