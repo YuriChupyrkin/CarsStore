@@ -27,6 +27,9 @@ class NavigationBar extends Component {
       <NavLink to="/contacts" activeStyle={{color: "green"}}>
         Contacts
       </NavLink>
+      <NavLink to="/cars" activeStyle={{color: "green"}}>
+        Cars
+      </NavLink>
     </div>
   }
 }

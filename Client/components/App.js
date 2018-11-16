@@ -5,6 +5,7 @@ import { HashRouter, Route } from 'react-router-dom';
 
 import Todos from './todo/todos';
 import Contacts from './contacts/contacts';
+import Cars from './cars/cars';
 import NavigationBar from './navigation/navigationBar';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <div className="body">
           <Route path="/" component={Todos} exact />
           <Route path="/contacts" component={Contacts}/>
+          <Route path="/cars" component={Cars}/>
         </div>
         <div className="footer"></div>
       </div>
