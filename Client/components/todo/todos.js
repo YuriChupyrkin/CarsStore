@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import TodoItem from './todoItem';
+
 class Todos extends Component {
   addTodo() {
     let value = this.todoInput.value;
@@ -17,12 +19,6 @@ class Todos extends Component {
 
   toggleTodo(id) {
     this.props.toggleTodo(id);
-  }
-
-  isCompleted(id) {
-    return this.props.todosStore[id].complete ?
-      'line-through' :
-      'none';
   }
 
   render() {
@@ -46,11 +42,11 @@ class Todos extends Component {
         {
           Object.keys(this.props.todosStore).map(
             (key, index) =>
-              <li key={index}
-                onClick={this.toggleTodo.bind(this, key)}
-                style={{textDecoration: this.isCompleted.call(this, key) }}>
-                  {this.props.todosStore[key].value}
-              </li>
+              <TodoItem 
+                key={index}
+                onTodoClick={this.toggleTodo.bind(this, key)}
+                todo={this.props.todosStore[key]}>
+              </TodoItem>
           )
         }
       </ul>
