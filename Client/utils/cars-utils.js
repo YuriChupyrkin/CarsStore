@@ -1,4 +1,8 @@
-import { doGetRequest } from '../helpers/httpHelper';
+import {
+  doGetRequest,
+  doDeleteRequest
+} from '../helpers/httpHelper';
+
 import store from '../appStore';
 
 const refreshCarList = () => {
@@ -17,6 +21,11 @@ const refreshCarList = () => {
   });
 };
 
+const deleteCar = (id) => {
+  return doDeleteRequest(`cars/${id}`);
+};
+
 export {
-  refreshCarList
+  refreshCarList,
+  deleteCar
 };

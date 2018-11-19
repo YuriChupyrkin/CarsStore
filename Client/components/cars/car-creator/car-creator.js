@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { doPutRequset } from '../../helpers/httpHelper';
-import { refreshCarList } from '../../utils/cars-utils';
+import { doPutRequset } from '../../../helpers/httpHelper';
+import { refreshCarList } from '../../../utils/cars-utils';
 
 class CarCreator extends Component {
   addCar() {

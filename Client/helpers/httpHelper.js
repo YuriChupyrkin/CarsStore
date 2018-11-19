@@ -15,8 +15,15 @@ const doGetRequest = (url, data) => {
   return get(url);
 };
 
+const doDeleteRequest = (url) => {
+  return ajax(url, {
+    method: 'DELETE'
+  });
+};
+
 export {
   doPostRequest,
   doPutRequset,
-  doGetRequest
+  doGetRequest,
+  doDeleteRequest
 };

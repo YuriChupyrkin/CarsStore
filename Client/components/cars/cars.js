@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { refreshCarList } from '../../utils/cars-utils';
 
-import CarList from './car-list';
-import CarCreator from './car-creator';
+import CarList from './car-list/car-list';
+import CarCreator from './car-creator/car-creator';
 
 class Cars extends Component {
   render() {
