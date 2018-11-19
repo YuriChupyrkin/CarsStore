@@ -11,6 +11,23 @@ function getFindOneExpr(id) {
   return { _id: ObjectID(id) };
 };
 
+module.exports.filter = (filterCriteria) => {
+  return new Promise((resolve, reject) => {
+    getCarsCollection().find({name: {
+      $regex: `.*${filterCriteria}.*`,
+      $options: 'i'
+    }}).toArray((err, docs) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(docs);
+      }
+    );
+  });
+}
+
 module.exports.all = () => {
   return new Promise((resolve, reject) => {
     getCarsCollection().find().toArray((err, docs) => {

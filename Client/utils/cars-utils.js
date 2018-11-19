@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 import {
   doGetRequest,
   doDeleteRequest
@@ -5,10 +7,14 @@ import {
 
 import store from '../appStore';
 
-const refreshCarList = () => {
-  console.log('GET CARS FROM SERVER');
+const refreshCarList = (query) => {
+  let url = 'cars';
 
-  doGetRequest('cars').then((carsArray) => {
+  if (query) {
+    url += `?${queryString.stringify(query)}`;
+  }
+
+  doGetRequest(url).then((carsArray) => {
     let carList = {};
     carsArray.forEach((carItem) => {
       carList[carItem._id] = {

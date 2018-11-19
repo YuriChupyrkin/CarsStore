@@ -1,7 +1,11 @@
 const carsModel = require('../models/carsModel');
 
 module.exports.all = (req, res) => {
-  carsModel.all().then((cars) => {
+  const action = req.query && req.query.filter ?
+    carsModel.filter.bind(this, req.query.filter) :
+    carsModel.all;
+  
+  action().then((cars) => {
     res.send(cars);
   }).catch((error) => {
     console.error(error);

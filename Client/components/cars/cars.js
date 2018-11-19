@@ -4,6 +4,7 @@ import { refreshCarList } from '../../utils/cars-utils';
 
 import CarList from './car-list/car-list';
 import CarCreator from './car-creator/car-creator';
+import CarsFilter from './cars-filter/cars-filter';
 
 class Cars extends Component {
   render() {
@@ -16,6 +17,9 @@ class Cars extends Component {
       <br/>
       <h2>Cars</h2>
       <CarCreator></CarCreator>
+
+      <br/>
+      <CarsFilter></CarsFilter>
 
       <br/>
       <CarList></CarList>
