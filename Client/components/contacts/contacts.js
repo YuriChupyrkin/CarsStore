@@ -19,7 +19,7 @@ class Contacts extends Component {
   }
 
   render() {
-    console.log('RENDER CONTACTS');
+    console.warn('RENDER CONTACTS');
     return <div>
       <hr/>
       <br/>

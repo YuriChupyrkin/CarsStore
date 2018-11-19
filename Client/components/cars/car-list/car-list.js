@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { deleteCar, refreshCarList } from '../../../utils/cars-utils';
@@ -18,8 +19,10 @@ class CarList extends Component {
           Object.keys(this.props.carsStore).map(
             (key, index) =>
               <li key={index}>
+                <NavLink to={`/car/${key}`}>
                   {this.props.carsStore[key].name}
-                  <button onClick={this.delete.bind(this, key)}>delete</button>
+                </NavLink>
+                <button onClick={this.delete.bind(this, key)}>delete</button>
               </li>
           )
         }

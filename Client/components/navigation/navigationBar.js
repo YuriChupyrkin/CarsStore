@@ -19,7 +19,7 @@ class NavigationBar extends Component {
   }
 
   render() {
-    console.log('RENDER NavigationBar');
+    console.warn('RENDER NavigationBar');
     return <div>
       <NavLink to="/" activeStyle={{color: "green"}} exact>
         Todos

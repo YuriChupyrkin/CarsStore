@@ -31,7 +31,12 @@ const deleteCar = (id) => {
   return doDeleteRequest(`cars/${id}`);
 };
 
+const getCarById = (id) => {
+  return doGetRequest(`cars/${id}`);
+};
+
 export {
   refreshCarList,
-  deleteCar
+  deleteCar,
+  getCarById
 };
